@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const isAuth = require("../middlewares/isAuth");
+const isAuth = require("../middlewares/auth");
 const User = require("../models/user");
 require("dotenv").config();
 const multer = require("multer");
