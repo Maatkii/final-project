@@ -29,21 +29,56 @@ const upload = multer({ storage: storage });
 
 router.post("/register", async (req, res) => {
   try {
-    const { userName, email, password } = req.body;
+    const { firstName, lastName, phoneNumber, role, email, password } =
+      req.body;
     bcrypt.hash(password, 12, async (err, hash) => {
       if (err) {
         res.status(500).json({ status: false, message: err });
       } else if (hash) {
-        const user = await User.create({
-          userName,
-          email,
-          password: hash,
-        });
-        res.status(201).json({
-          status: true,
-          message: "user created",
-          data: user,
-        });
+        if (role == "admin") {
+          const user = await User.create({
+            firstName,
+            lastName,
+            role: "admin",
+            email,
+            password: hash,
+          });
+          res.status(201).json({
+            status: true,
+            message: "admin created",
+            data: user,
+          });
+        } else if (role == "client") {
+          const user = await User.create({
+            firstName,
+            lastName,
+            role: "client",
+            email,
+            phoneNumber,
+            password: hash,
+            balance: 0,
+          });
+          res.status(201).json({
+            status: true,
+            message: "Client created",
+            data: user,
+          });
+        } else if (role == "freelancer") {
+          const user = await User.create({
+            firstName,
+            lastName,
+            role: "freelancer",
+            email,
+            phoneNumber,
+            password: hash,
+            balance: 0,
+          });
+          res.status(201).json({
+            status: true,
+            message: "freelancer created",
+            data: user,
+          });
+        }
       }
     });
   } catch (err) {
@@ -91,7 +126,15 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ error });
   }
 });
-
+router.get("/offers", async (req, res) => {
+  try {
+    const offers = await offre.find({});
+    res.status(200).json({ message: "offers List  ! ", data: offers });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server Error", error });
+  }
+});
 router.get("/current", isAuth, (req, res) => {
   if (req.user) {
     res.send({ status: true, msg: "authorized", user: req.user });
