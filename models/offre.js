@@ -24,8 +24,14 @@ const offerSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  offerSituation: {
+    type: String,
+    default: "open",
+    enum: ["open", "closed"],
+  },
   proposals: [
     {
+      _id: { type: mongoose.Schema.Types.ObjectId },
       freelancer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",

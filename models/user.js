@@ -6,9 +6,7 @@ let image =
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
-    required: function () {
-      return this.role !== "admin";
-    },
+    required: true,
   },
   lastName: {
     type: String,

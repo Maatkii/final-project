@@ -19,6 +19,7 @@ const processSchema = new mongoose.Schema({
   projectProcess: {
     type: String,
     enum: ["ongoing", "Finished"],
+    default: "ongoing",
   },
 });
 
