@@ -21,6 +21,8 @@ router.post("/add-offer", isAuth, async (req, res) => {
   try {
     const { title, description, salary, duration } = req.body;
     const newOffer = await offre.create({
+      client: req.user._id,
+
       title,
       description,
       salary,

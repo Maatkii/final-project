@@ -1,5 +1,7 @@
 const express = require("express");
 const offre = require("../models/offre");
+const Portfolio = require("../models/portfolios");
+const isAuth = require("../middlewares/auth");
 
 const router = express.Router();
 // Route for adding a new proposal to an offer
@@ -29,6 +31,52 @@ router.post("/offer/:offerId/proposals", async (req, res) => {
   } catch (error) {
     console.error("Error adding proposal:", error);
     res.status(500).json({ message: "Internal server error" });
+  }
+});
+router.post("/", isAuth, async (req, res) => {
+  try {
+    const { experience, skills, projects, socialMediaLinks } = req.body;
+    const portfolio = new Portfolio({
+      user: req.user._id,
+      experience,
+      skills,
+      projects,
+      socialMediaLinks,
+    });
+    const savedPortfolio = await portfolio.save();
+    res.status(201).json(savedPortfolio);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// Get portfolio by ID
+router.get("/", isAuth, async (req, res) => {
+  try {
+    const portfolio = await Portfolio.findOne({ user: req.user._id }).populate(
+      "user",
+      "-password"
+    );
+    if (!portfolio) {
+      return res.status(404).json({ message: "Portfolio not found" });
+    }
+    res.json(portfolio);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update portfolio entry
+router.put("/:portfolioId", isAuth, async (req, res) => {
+  try {
+    const updatedPortfolio = await Portfolio.findByIdAndUpdate(
+      req.params.portfolioId,
+      req.body,
+      { new: true }
+    );
+    res.json(updatedPortfolio);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 });
 module.exports = router;
