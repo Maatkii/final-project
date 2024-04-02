@@ -5,12 +5,14 @@ import { PrivateRoute } from "./utils/ProtectedRoute";
 import { PublicRoute } from "./utils/PublicRoute";
 
 import { useSelector } from "react-redux";
+import NavBar from "./Pages/Navbar/navbar";
 
 function App() {
   const { user } = useSelector((state) => state.LoginReducer);
 
   return (
     <div>
+      <NavBar />
       <Routes>
         <Route
           path="/login"
