@@ -1,56 +1,68 @@
-import React, { useEffect, useState } from "react";
-import { login } from "../../redux/actions/Actions";
-import { useDispatch, useSelector } from "react-redux";
-import ClipLoader from "react-spinners/ClipLoader";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState } from "react";
 import "./style.css";
-import "react-toastify/dist/ReactToastify.css";
-import { errorToast } from "../../utils";
+
 const Login = () => {
-  const navigate = useNavigate();
-  const { loading, isAuth, role, error } = useSelector(
-    (state) => state.LoginReducer
-  );
-  useEffect(() => {
-    setTimeout(() => {
-      /* eslint-disable-next-line*/
-      if (isAuth && role == 1) {
-        navigate("/dashboard-instructor");
-        /* eslint-disable-next-line*/
-      } else if (isAuth && role == 2) {
-        navigate("/dashboard-student");
-      }
-    }, 2000);
-    /* eslint-disable-next-line*/
-  }, [isAuth]);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const dispatch = useDispatch();
-  const [loginDetails, setLoginDetails] = useState({
-    email: "",
-    password: "",
-  });
-  const handleChange = (e) => {
-    setLoginDetails({
-      ...loginDetails,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-  const handleSubmit = (e) => {
-    if (!loginDetails.email.includes("@")) {
-      errorToast("Email Not Valid");
+  const handleLogin = () => {
+    // Here you would typically perform authentication, for example, sending a request to a server
+    // For simplicity, let's just check if the username and password match 'admin' and 'password'
+    if (username === "email" && password === "password") {
+      setLoggedIn(true);
+    } else {
+      alert("Invalid email or password");
     }
-    e.preventDefault();
-    dispatch(login(loginDetails));
   };
 
-  useEffect(() => {
-    errorToast(error);
-  }, [error]);
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUsername("");
+    setPassword("");
+  };
 
+  if (loggedIn) {
+    return (
+      <div>
+        <p>Welcome, {username}!</p>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+    );
+  }
   return (
-    <>
-      <h4>Put Your login Page Code Here</h4>
-    </>
+    <div className="form-login">
+      <div className="Login">
+        {/* <h1>LOGIN</h1> */}
+        <div className="form">
+          <i class="fa-solid fa-user"></i>
+          <input
+            type="email"
+            placeholder="Email"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <i class="fa-solid fa-lock  "></i>
+
+          <input
+            type="password"
+            placeholder="******************"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="remember-box">
+            <div>
+              <input type="checkbox" value={false} />
+              <label>Remember me</label>
+            </div>
+            <p>forget Password?</p>
+          </div>
+          <button onClick={handleLogin} className="btn btn-info btn-login">
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
 
