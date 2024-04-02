@@ -22,6 +22,14 @@ function App() {
             </PublicRoute>
           }
         />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute user={user}>
+              <Register />
+            </PublicRoute>
+          }
+        />
       </Routes>
     </div>
   );
