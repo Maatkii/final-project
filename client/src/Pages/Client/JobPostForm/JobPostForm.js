@@ -20,7 +20,7 @@ function JobPostForm({ onSubmit }) {
       <h2>Post a Job Offer</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="title">Title:</label>
+          <label htmlFor="title">Project name:</label>
           <input
             type="text"
             id="title"

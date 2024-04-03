@@ -1,5 +1,8 @@
-import { Navbar, Container, Nav, Form, Button } from "react-bootstrap";
+import React from "react";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./style.css";
+
 function NavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -15,7 +18,8 @@ function NavBar() {
         <Navbar.Brand
           className="Name"
           style={{ paddingLeft: "157px", paddingRight: "25px" }}
-          href="#"
+          as={Link}
+          to="/"
         >
           NameOfApp
         </Navbar.Brand>
@@ -29,15 +33,23 @@ function NavBar() {
             }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">How It Works</Nav.Link>
-            <Nav.Link href="#action2">Browse Jobs</Nav.Link>
+            <Nav.Link as={Link} to="/Home">
+              Home
+            </Nav.Link>
+            <Nav.Link href="#how-it-works">How It Works</Nav.Link>
+            <Nav.Link href="#browse-jobs">Browse Jobs</Nav.Link>
           </Nav>
-          <Form className="d-flex  form-sign">
-            <Nav.Link href="#action1">Log In</Nav.Link>
-            <Nav.Link href="#action2">Sing Up</Nav.Link>
-          </Form>
+          <Nav className="d-flex align-items-center">
+            <Nav.Link as={Link} to="/login">
+              Log In
+            </Nav.Link>
+            <Nav.Link as={Link} to="/register">
+              Sign Up
+            </Nav.Link>
+          </Nav>
           <Button
+            as={Link}
+            to="/job-post"
             style={{ padding: "5px 25px", margin: "52px" }}
             variant="dark"
           >
