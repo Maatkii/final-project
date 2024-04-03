@@ -6,10 +6,10 @@ function NavBar() {
       <Container
         fluid
         style={{
-          background: "linear-gradient(45deg, #BBDEFB, transparent)",
-          marginTop: "-8px",
+          background: "linear-gradient(45deg, #00000094, transparent)",
+          marginTop: "-11px",
           height: "79px",
-          padding: "4px 53px",
+          padding: "0px 53px",
         }}
       >
         <Navbar.Brand

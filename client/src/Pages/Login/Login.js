@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
+import NavBar from "../Navbar/navbar";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -31,38 +32,40 @@ const Login = () => {
     );
   }
   return (
-    <div className="form-login">
-      <div className="Login">
-        {/* <h1>LOGIN</h1> */}
-        <div className="form">
-          <i class="fa-solid fa-user"></i>
-          <input
-            type="email"
-            placeholder="Email"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <i class="fa-solid fa-lock  "></i>
+    <>
+      <div className="form-login">
+        <div className="Login">
+          {/* <h1>LOGIN</h1> */}
+          <div className="form">
+            <i class="fa-solid fa-user"></i>
+            <input
+              type="email"
+              placeholder="Email"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <i class="fa-solid fa-lock  "></i>
 
-          <input
-            type="password"
-            placeholder="******************"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div className="remember-box">
-            <div>
-              <input type="checkbox" value={false} />
-              <label>Remember me</label>
+            <input
+              type="password"
+              placeholder="******************"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <div className="remember-box">
+              <div>
+                <input type="checkbox" value={false} />
+                <label>Remember me</label>
+              </div>
+              <p>forget Password?</p>
             </div>
-            <p>forget Password?</p>
+            <button onClick={handleLogin} className="btn btn-info btn-login">
+              Login
+            </button>
           </div>
-          <button onClick={handleLogin} className="btn btn-info btn-login">
-            Login
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

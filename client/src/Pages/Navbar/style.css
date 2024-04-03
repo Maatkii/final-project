@@ -2,3 +2,6 @@
   margin-left: 24px;
   padding-right: 14px;
 }
+.bg-body-tertiary {
+  padding-bottom: 0 !important;
+}
