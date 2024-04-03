@@ -7,6 +7,7 @@ import { PublicRoute } from "./utils/PublicRoute";
 import { useSelector } from "react-redux";
 import NavBar from "./Pages/Navbar/navbar";
 import Register from "./Pages/Register/Register";
+import JobPostForm from "./Pages/Client/JobPostForm/JobPostForm";
 function App() {
   const { user } = useSelector((state) => state.LoginReducer);
 
@@ -27,6 +28,14 @@ function App() {
           element={
             <PublicRoute user={user}>
               <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/job-post"
+          element={
+            <PublicRoute user={user}>
+              <JobPostForm />
             </PublicRoute>
           }
         />
