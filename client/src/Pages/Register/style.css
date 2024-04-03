@@ -1,6 +1,8 @@
 .register {
-  background: #fff;
-  height: 100vh;
+  background: #333;
+  height: 90vh;
+  display: flex;
+  align-items: center;
 }
 .container {
   --container-width: 1280px;
@@ -33,16 +35,16 @@
   padding-bottom: 8px;
 }
 .air3-btn-box.is-active {
-  border: 2px solid #108a00;
+  border: 2px solid #0a1708;
 }
 .air3-btn-box:hover {
-  border: 2px solid #108a00;
+  border: 2px solid #10130f;
 }
 .air3-btn-box {
   position: relative;
   padding: 24px;
-  height: 100%;
-  width: 240px;
+  height: 300px;
+  width: 300px;
   background: #f9f9f9;
   border: 2px solid #c6c6c6;
   color: #181818;
@@ -51,6 +53,12 @@
   transition: all 0.1s ease-in-out;
   text-align: left;
   font-weight: inherit;
+}
+p.text-body {
+  color: #fff !important;
+}
+.air3-grid-container h2 {
+  color: #fff;
 }
 .r-cards {
   margin-bottom: 40px;
@@ -87,10 +95,10 @@
   --icon-size: 24px;
 }
 .air3-radio-label.is-active .air3-checkbox-fake-input {
-  --checkbox-bg: #108a00;
+  --checkbox-bg: #141a13;
   --checkbox-text-icon: #fff;
-  border-color: #108a00;
-  background: #108a00;
+  border-color: #17046a;
+  background: #4d0ac9;
 }
 .air3-radio-label .air3-checkbox-fake-input {
   border-radius: 50%;
@@ -124,7 +132,7 @@
   transition: transform 0.3s ease;
 }
 .air3-btn-primary:hover {
-  background: #14a800;
+  background: #070125;
 }
 .air3-btn-primary {
   display: inline-flex;
@@ -139,7 +147,7 @@
   font-size: 16px;
   font-weight: 500;
   background-color: transparent;
-  background-color: #108a00;
+  background-color: #0e054a;
   color: inherit;
   color: #fff;
   border: 2px solid transparent;
@@ -152,9 +160,10 @@
   cursor: pointer;
   text-decoration: none;
   margin-bottom: 10px;
+  width: 250px;
 }
 .up-n-link {
-  color: #108a00;
+  color: #4e05cb;
   font-weight: 600;
   text-decoration: underline !important;
   transition: color 0.1s ease-in-out;
