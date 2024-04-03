@@ -6,7 +6,7 @@ import { PublicRoute } from "./utils/PublicRoute";
 
 import { useSelector } from "react-redux";
 import NavBar from "./Pages/Navbar/navbar";
-
+import Register from "./Pages/Register/Register";
 function App() {
   const { user } = useSelector((state) => state.LoginReducer);
 

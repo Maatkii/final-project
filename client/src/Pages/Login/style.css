@@ -78,8 +78,11 @@
 .login-h1 {
   color: blue; /* Appliquer la couleur bleue */
 }
-.remember-box p {
+
+.remember-box p,
+.remember-box label {
   font-weight: 600;
+  color: #fff;
 }
 .btn-login {
   background: #a4a4a4c5 !important;
