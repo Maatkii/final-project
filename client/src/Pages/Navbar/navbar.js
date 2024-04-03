@@ -19,7 +19,7 @@ function NavBar() {
           className="Name"
           style={{ paddingLeft: "157px", paddingRight: "25px" }}
           as={Link}
-          to="/"
+          to="/Home"
         >
           NameOfApp
         </Navbar.Brand>
