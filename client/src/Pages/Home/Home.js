@@ -7,7 +7,7 @@ const Home = () => {
       <section className="banner">
         <video src={video} autoPlay loop muted></video>
         <div className="content">
-          <h1>Welcome to YourPlatform</h1>
+          <h1>Welcome to Your Platform</h1>
           <p>A platform connecting freelancers and clients.</p>
         </div>
       </section>
