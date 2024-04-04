@@ -67,7 +67,7 @@ const FormC = () => {
           </button>
           <p className="text-center text-body mt-4x mb-6x">
             Already have an account ?
-            <Link to="/login" className="up-n-link">
+            <Link to="/Login" className="up-n-link">
               Log In
             </Link>
           </p>

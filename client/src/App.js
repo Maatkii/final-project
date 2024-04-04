@@ -3,7 +3,7 @@ import Login from "./Pages/Login/Login";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "./utils/ProtectedRoute";
 import { PublicRoute } from "./utils/PublicRoute";
-
+import Home from "./Pages/Home/Home";
 import { useSelector } from "react-redux";
 import NavBar from "./Pages/Navbar/navbar";
 import Register from "./Pages/Register/Register";
@@ -15,6 +15,14 @@ function App() {
     <div>
       <NavBar />
       <Routes>
+        <Route
+          path="/Home"
+          element={
+            <PublicRoute user={user}>
+              <Home />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/login"
           element={
