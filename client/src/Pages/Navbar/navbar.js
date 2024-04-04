@@ -20,7 +20,7 @@ function NavBar() {
           className="Name"
           style={{ paddingLeft: "157px", paddingRight: "25px" }}
           as={Link}
-          to="/Home"
+          to="/"
         >
           NameOfApp
         </Navbar.Brand>
@@ -34,7 +34,7 @@ function NavBar() {
             }}
             navbarScroll
           >
-            <Nav.Link as={Link} to="/Home">
+            <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
             <Nav.Link href="#how-it-works">How It Works</Nav.Link>
