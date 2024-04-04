@@ -9,7 +9,7 @@ function NavBar() {
       <Container
         fluid
         style={{
-          background: "linear-gradient(45deg, #00000094, transparent)",
+          background: "linear-gradient(rgb(0 0 0 / 84%))",
           marginTop: "-11px",
           height: "79px",
           padding: "0px 53px",

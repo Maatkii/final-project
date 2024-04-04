@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./JobPostForm.css";
 
 function JobPostForm({ onSubmit }) {
   const [title, setTitle] = useState("");
@@ -16,9 +17,9 @@ function JobPostForm({ onSubmit }) {
   };
 
   return (
-    <div>
+    <div className="job-post">
       <h2>Post a Job Offer</h2>
-      <form onSubmit={handleSubmit}>
+      <form className="job-post-form" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Project name:</label>
           <input
@@ -50,8 +51,9 @@ function JobPostForm({ onSubmit }) {
         </div>
         <div>
           <label htmlFor="period">Period:</label>
-          <textarea
-            id="text"
+          <input
+            id="period"
+            type="text"
             value={period}
             onChange={(e) => setPeriod(e.target.value)}
             required
