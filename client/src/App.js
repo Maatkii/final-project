@@ -17,7 +17,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route
-          path="/Home"
+          path="/"
           element={
             <PublicRoute user={user}>
               <Home />

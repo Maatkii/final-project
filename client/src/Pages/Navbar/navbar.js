@@ -5,21 +5,22 @@ import "./style.css";
 
 function NavBar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container
-        fluid
-        style={{
-          background: "linear-gradient(45deg, #00000094, transparent)",
-          marginTop: "-11px",
-          height: "79px",
-          padding: "0px 53px",
-        }}
-      >
+    <Navbar
+      expand="lg"
+      className="bg-body-tertiary"
+      style={{
+        background: "linear-gradient(to right,rgb(0 0 0 / 60%),#fff)",
+        marginTop: "-11px",
+        height: "79px",
+        padding: "0px 53px",
+      }}
+    >
+      <Container fluid>
         <Navbar.Brand
           className="Name"
           style={{ paddingLeft: "157px", paddingRight: "25px" }}
           as={Link}
-          to="/Home"
+          to="/"
         >
           NameOfApp
         </Navbar.Brand>
@@ -33,7 +34,7 @@ function NavBar() {
             }}
             navbarScroll
           >
-            <Nav.Link as={Link} to="/Home">
+            <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
             <Nav.Link href="#how-it-works">How It Works</Nav.Link>

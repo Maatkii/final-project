@@ -1,56 +1,96 @@
-/* Styles for JobPostForm component */
-.form-container {
-  max-width: 500px;
+.job-post h2 {
+  font-size: 47px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  margin-top: 30px;
+}
+.job-post {
+  width: 100%;
+  height: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-image: url(../../../Assets//images/lmk.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.job-post-form input,
+.job-post-form textarea {
+  background-color: #00000071;
+  border: none;
+  outline: none;
+}
+.job-post-form label {
+  color: #fff;
+  font-size: 20px;
+}
+/* Form styling */
+.job-post-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+/* Form label styling */
+label {
+  display: block;
+  margin-bottom: 8px;
 }
 
-.form-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.form-container form {
-  display: grid;
-  gap: 15px;
-}
-
-.form-container label {
-  font-size: 16px;
-}
-
-.form-container input[type="text"],
-.form-container input[type="number"],
-.form-container textarea {
+/* Input field styling */
+input[type="text"],
+input[type="number"],
+textarea {
   width: 100%;
   padding: 10px;
-  font-size: 16px;
+  margin-bottom: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   box-sizing: border-box;
 }
 
-.form-container textarea {
+/* Textarea field styling */
+textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 100px; /* Adjust the minimum height as needed */
 }
 
-.form-container button {
+/* Required field styling */
+input:required,
+textarea:required {
+  border-color: #ff6347; /* Change border color for required fields */
+}
+/* Form title styling */
+.job-post h2 {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+/* Form input styling */
+.job-post-form input[type="text"],
+.job-post-form input[type="number"],
+.job-post-form textarea {
   width: 100%;
   padding: 10px;
-  font-size: 18px;
-  background-color: #007bff;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: 1px;
+}
+
+/* Form submit button styling */
+.job-post-form button[type="submit"] {
+  background-color: #ff6600;
   color: #fff;
   border: none;
   border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
+  margin: 30px auto 0;
+  width: 50%;
 }
 
-.form-container button:hover {
-  background-color: #0056b3;
+/* Form submit button hover effect */
+.job-post-form button[type="submit"]:hover {
+  background-color: #ff6600;
 }
