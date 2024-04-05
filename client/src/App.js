@@ -9,6 +9,7 @@ import NavBar from "./Pages/Navbar/navbar";
 import Register from "./Pages/Register/Register";
 import JobPostForm from "./Pages/Client/JobPostForm/JobPostForm";
 import Profile from "./Pages/Freelancer/Profile";
+
 function App() {
   const { user } = useSelector((state) => state.LoginReducer);
 
