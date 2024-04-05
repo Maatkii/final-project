@@ -153,7 +153,8 @@ body {
   flex: 0 1 calc(33.33% - 40px); /* Adjusted width for each step */
   padding: 20px; /* Added padding for steps */
   border-radius: 8px; /* Rounded corners for steps */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+  box-shadow: 0 4px 20px 20px rgb(255 255 255 / 50%); /* Added shadow for depth */
+  background-color: rgb(255 255 255 / 50%);
 }
 
 .step h3 {

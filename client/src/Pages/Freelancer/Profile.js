@@ -1,68 +1,72 @@
+// Profile.js
 import React, { useState } from "react";
+import "./steps/Step1.css";
+import Step1 from "./steps/Step1";
+import Step2 from "./steps/Step2";
 
 function Profile() {
-  const [nom, setNom] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [portfolio, setPortfolio] = useState(null);
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: "",
+    pic: "",
+    status: "",
+    skills: "",
+    experience: "",
+    technologies: "",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Vous pouvez ajouter ici la logique pour envoyer les données au serveur, y compris le fichier portfolio.
-    console.log("Formulaire soumis:", { nom, email, message, portfolio });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleFileChange = (file) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setFormData({ ...formData, pic: e.target.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
+  const handleSubmit = () => {
+    // Handle form submission here
+    console.log("Form submitted:", formData);
   };
 
   return (
-    <div>
-      <h1>Personnal Profile</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nom">Name:</label>
-        <input
-          type="text"
-          id="nom"
-          value={nom}
-          onChange={(e) => setNom(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-
-        <label htmlFor="portfolio">Portfolio:</label>
-        <input
-          type="file"
-          id="portfolio"
-          onChange={(e) => setPortfolio(e.target.files[0])}
-          accept=".pdf,.doc,.docx,.txt"
-          required
-        />
-        <br />
-        <br />
-
-        <label htmlFor="message">Message:</label>
-        <br />
-        <textarea
-          id="message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          rows="4"
-          cols="50"
-        />
-        <br />
-        <br />
-
-        <input type="submit" value="Submit" />
-      </form>
+    <div className="centered-container">
+      {" "}
+      {/* Centering container */}
+      <div className="multi-step-form-container">
+        <div className="multi-step-form">
+          {step === 1 && (
+            <Step1
+              formData={formData}
+              handleChange={handleChange}
+              handleNext={handleNext}
+              handleFileChange={handleFileChange}
+            />
+          )}
+          {step === 2 && (
+            <Step2
+              formData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              handleBack={handleBack}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
