@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
 }
-.container {
+.register .container {
   --container-width: 1280px;
   --container-ws-x: 16px;
   --container-ws-y: 16px;
@@ -15,7 +15,7 @@
   padding-right: 80px !important;
   padding-left: 80px !important;
 }
-.air3-grid-container {
+.register .air3-grid-container {
   --template-col: repeat(12, 1fr);
   --row-gap: 16px;
   --col-gap: 16px;
@@ -25,7 +25,6 @@
   gap: 32px;
 }
 .page-containers {
-  padding: 0 80px;
   grid-column: 3 / 11;
 }
 .mt-8x {

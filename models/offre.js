@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const offerSchema = new mongoose.Schema({
   client: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
   },
   title: {
     type: String,
@@ -12,13 +12,16 @@ const offerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  salary: {
-    type: Number,
+  price: {
+    type: {},
     required: true,
   },
-  duration: {
+  durationLimit: {
     type: String,
     required: true,
+  },
+  skills: {
+    type: [],
   },
   postedDate: {
     type: Date,
@@ -29,18 +32,25 @@ const offerSchema = new mongoose.Schema({
     default: "open",
     enum: ["open", "closed"],
   },
+  attachement: {
+    type: [],
+  },
   proposals: [
     {
-      _id: { type: mongoose.Schema.Types.ObjectId },
       freelancer: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
+        ref: "User",
       },
       description: { type: String, required: true },
       situation: {
         type: String,
         default: "Pending",
         enum: ["Pending", "Accepted", "Refused"],
+      },
+      price: { type: Number, required: true },
+      deliveryTime: {
+        number: { type: Number, required: true },
+        period: { type: String, required: true },
       },
     },
   ],

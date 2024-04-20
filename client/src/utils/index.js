@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import axios from "axios";
 export const url = "http://localhost:5000";
 
 export const errorToast = (err) => {
@@ -57,4 +58,49 @@ export const dateFunction = (date) => {
   const year = dateValue.getFullYear();
 
   return `${year}-${month}-${day}`;
+};
+
+const upload = async (file) => {
+  const data = new FormData();
+  data.append("file", file);
+  data.append("upload_preset", "upload");
+
+  try {
+    const res = await axios.post(
+      "https://api.cloudinary.com/v1_1/dzcf29ead/upload",
+      data
+    );
+
+    const { url } = res.data;
+    return url;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export default upload;
+
+export const calculateTimeSince = (date) => {
+  const currentDate = new Date();
+  const pastDate = new Date(date);
+  const timeDifference = currentDate.getTime() - pastDate.getTime();
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 0) {
+    return `${days} days ago`;
+  } else if (hours > 0) {
+    return `${hours} hours ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minutes ago`;
+  } else {
+    return `${seconds} seconds ago`;
+  }
+};
+export const getSender = (loggedUser, users) => {
+  return users[0]._id === loggedUser._id
+    ? { firstName: users[1].firstName, lastName: users[1].lastName }
+    : { firstName: users[0].firstName, lastName: users[0].lastName };
 };

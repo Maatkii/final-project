@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-image: url("../../../Assets//images/lmkr.jpg");
+  /* background-image: url("../../../Assets//images/lmkr.jpg"); */
   background-size: cover;
   background-position: center;
   background-color: rgba(225, 225, 225, 0.5);

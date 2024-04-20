@@ -6,8 +6,8 @@ function PublicRoute({ children }) {
   const userRole = loggedIn ? jwt_decode(loggedIn).role : null;
 
   if (loggedIn) {
-    if (userRole === "2") {
-      return <Navigate to="/dashboard" />;
+    if (userRole === "client" || userRole === "freelancer") {
+      return <Navigate to="/task-list" />;
     } else if (userRole === "1") {
       return <Navigate to="/dashboard" />;
     }

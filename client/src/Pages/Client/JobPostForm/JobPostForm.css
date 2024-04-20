@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background-image: url("../../../Assets/images/lmk.jpg");
+  /* background-image: url("../../../Assets/images/lmk.jpg"); */
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -22,7 +22,7 @@ body {
 }
 
 /* Form label styles */
-label {
+.job-post label {
   color: #fff;
   font-size: 20px;
 }

@@ -4,11 +4,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const isAuth = require("../middlewares/auth");
 const User = require("../models/user");
+const offre = require("../models/offre");
 require("dotenv").config();
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const nodemailer = require("nodemailer");
+const portfolios = require("../models/portfolios");
+const Notification = require("../models/Notification");
 
 cloudinary.config({
   cloud_name: "",
@@ -31,6 +34,10 @@ router.post("/register", async (req, res) => {
   try {
     const { firstName, lastName, phoneNumber, role, email, password } =
       req.body;
+    const findUser = await User.findOne({ email });
+    if (findUser) {
+      res.status(409).json({ message: "Email Already Exist ! " });
+    }
     bcrypt.hash(password, 12, async (err, hash) => {
       if (err) {
         res.status(500).json({ status: false, message: err });
@@ -60,7 +67,7 @@ router.post("/register", async (req, res) => {
           });
           res.status(201).json({
             status: true,
-            message: "Client created",
+            message: "Account Created Successfully",
             data: user,
           });
         } else if (role == "freelancer") {
@@ -73,9 +80,12 @@ router.post("/register", async (req, res) => {
             password: hash,
             balance: 0,
           });
+          await portfolios.create({
+            user: user._id,
+          });
           res.status(201).json({
             status: true,
-            message: "freelancer created",
+            message: "Account Created Successfully",
             data: user,
           });
         }
@@ -96,7 +106,11 @@ router.post("/login", async (req, res) => {
         if (result == true) {
           jwt.sign(
             {
-              username: findUser.username,
+              firstName: findUser.firstName,
+              lastName: findUser.lastName,
+              balance: findUser.balance,
+              avatar: findUser.avatar,
+              phoneNumber: findUser.phoneNumber,
               email: findUser.email,
               role: findUser.role,
               _id: findUser._id,
@@ -135,12 +149,51 @@ router.get("/offers", async (req, res) => {
     res.status(500).json({ message: "server Error", error });
   }
 });
-router.get("/current", isAuth, (req, res) => {
+router.get("/offer/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const offer = await offre
+      .findById(id)
+      .populate("client", "-password")
+      .populate("proposals.freelancer", "-password");
+    res.status(200).json({ message: "offer details  ! ", data: offer });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "server Error", error });
+  }
+});
+router.get("/current", isAuth, async (req, res) => {
   if (req.user) {
-    res.send({ status: true, msg: "authorized", user: req.user });
+    const findUser = await User.findById(req.user._id);
+    res.send({ status: true, msg: "authorized", user: findUser });
   } else {
     res.send({ status: false, msg: "unauthorised" });
   }
 });
+router.get("/notifications", isAuth, async (req, res) => {
+  try {
+    const notifications = await Notification.find({
+      notificationFor: req.user._id,
+    }).populate("notificationFrom", "-password");
+    res.status(200).json({ data: notifications });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error });
+  }
+});
 
+router.put("/make-notification-readed", isAuth, async (req, res) => {
+  try {
+    const result = await Notification.updateMany(
+      { notificationFor: req.user._id },
+      { $set: { Readed: true } }
+    );
+
+    // Return a success response
+    res.status(200).json({ message: "Notifications marked as read." });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
 module.exports = router;

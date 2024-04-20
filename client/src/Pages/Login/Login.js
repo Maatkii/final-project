@@ -1,56 +1,47 @@
 import React, { useState } from "react";
 import "./style.css";
-import NavBar from "../Navbar/navbar";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/actions/Actions";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  const { loading } = useSelector((state) => state.LoginReducer);
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setLoginDetails({ ...loginDetails, [e.target.name]: e.target.value });
+  };
   const handleLogin = () => {
-    // Here you would typically perform authentication, for example, sending a request to a server
-    // For simplicity, let's just check if the username and password match 'admin' and 'password'
-    if (username === "email" && password === "password") {
-      setLoggedIn(true);
-    } else {
-      alert("Invalid email or password");
-    }
+    dispatch(login({ loginDetails, navigate }));
   };
 
-  const handleLogout = () => {
-    setLoggedIn(false);
-    setUsername("");
-    setPassword("");
-  };
-
-  if (loggedIn) {
-    return (
-      <div>
-        <p>Welcome, {username}!</p>
-        <button onClick={handleLogout}>Logout</button>
-      </div>
-    );
-  }
   return (
     <>
       <div className="form-login">
         <div className="Login">
           {/* <h1>LOGIN</h1> */}
           <div className="form">
-            <i class="fa-solid fa-user"></i>
+            <i className="fa-solid fa-user"></i>
             <input
               type="email"
+              name="email"
               placeholder="Email"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={loginDetails.email}
+              onChange={handleChange}
             />
-            <i class="fa-solid fa-lock  "></i>
+            <i className="fa-solid fa-lock  "></i>
 
             <input
               type="password"
               placeholder="******************"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              value={loginDetails.password}
+              onChange={handleChange}
             />
             <div className="remember-box">
               <div>
@@ -60,7 +51,7 @@ const Login = () => {
               <p>forget Password?</p>
             </div>
             <button onClick={handleLogin} className="btn btn-info btn-login">
-              Login
+              {loading ? <ClipLoader color="#ffffff" size={20} /> : "Login"}
             </button>
           </div>
         </div>

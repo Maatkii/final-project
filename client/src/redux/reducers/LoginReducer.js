@@ -3,6 +3,7 @@ import {
   ERROR,
   LOADING,
   LOGIN_USER,
+  NOTIFICATIONS,
 } from "../constants/actions-types";
 
 const initialState = {
@@ -12,13 +13,14 @@ const initialState = {
   loading: false,
   role: "",
   error: undefined,
+  notification: [],
 };
 
 const LoginReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case LOGIN_USER:
-      localStorage.setItem("accessToken", payload.token);
+      localStorage.setItem("accessToken", payload);
       return {
         ...state,
         loading: true,
@@ -30,19 +32,25 @@ const LoginReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        user: payload.data,
+        user: payload.user,
         userLoading: false,
+        isAuth: true,
       };
     case LOADING:
       return {
         ...state,
-        loading: true,
+        loading: !state.loading,
       };
     case ERROR:
       return {
         ...state,
         loading: false,
         error: payload,
+      };
+    case NOTIFICATIONS:
+      return {
+        ...state,
+        notification: payload,
       };
     default:
       return state;

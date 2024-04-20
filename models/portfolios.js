@@ -2,21 +2,37 @@ const mongoose = require("mongoose");
 const portfolioSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+    ref: "User",
   },
+  tagLine: {
+    type: String,
+    default: "",
+  },
+  description: {
+    type: String,
+    default: "",
+  },
+
   experience: [
     {
       title: {
         type: String,
         required: true,
       },
-
+      companyName: {
+        type: String,
+        required: true,
+      },
       description: {
         type: String,
         required: true,
       },
-      date: {
-        type: Date,
+      startDate: {
+        type: String,
+        required: true,
+      },
+      endDate: {
+        type: String,
         required: true,
       },
     },
@@ -24,11 +40,6 @@ const portfolioSchema = new mongoose.Schema({
   skills: [
     {
       name: { type: String, required: true },
-      level: {
-        type: String,
-        required: true,
-        enum: ["beginner", "intermediate", "pro"],
-      },
     },
   ],
   projects: [
@@ -39,8 +50,16 @@ const portfolioSchema = new mongoose.Schema({
   ],
   socialMediaLinks: [
     {
-      name: { type: String },
-      link: { type: String },
+      name: { type: String, default: "github" },
+      link: { type: String, default: "" },
+    },
+    {
+      name: { type: String, default: "behance" },
+      link: { type: String, default: "" },
+    },
+    {
+      name: { type: String, default: "dribbble" },
+      link: { type: String, default: "" },
     },
   ],
 });
