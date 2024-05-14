@@ -17,15 +17,13 @@ export const current = () => async (dispatch) => {
     };
     let result = await axios
       .get(`${url}/api/v1/auth/current`, config)
+      .then((res) => dispatch({ type: CURRENT_USER, payload: res.data }))
       .catch((err) => {
         if (err.response.data.message === "Invalid token") {
           localStorage.removeItem("accessToken");
           window.location.reload();
         }
       });
-    if (result.data.status) {
-      dispatch({ type: CURRENT_USER, payload: result.data });
-    }
   } catch (error) {
     console.log(error);
   }

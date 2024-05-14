@@ -86,6 +86,7 @@ const ForgetPassword = () => {
                   <input
                     type="password"
                     className="input-text with-border"
+                    placeholder="confirm code"
                     name="resetCode"
                     onChange={(e) => setConfirmResetCode(e.target.value)}
                     required=""
@@ -110,12 +111,14 @@ const ForgetPassword = () => {
                   <input
                     type="password"
                     className="input-text with-border"
+                    placeholder="new password "
                     name="password"
                     onChange={(e) => setPassword(e.target.value)}
                     required=""
                   />
                   <input
                     type="password"
+                    placeholder="confirm password"
                     className="input-text with-border"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required=""
