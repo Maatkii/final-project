@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/actions/Actions";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -48,7 +48,7 @@ const Login = () => {
                 <input type="checkbox" value={false} />
                 <label>Remember me</label>
               </div>
-              <p>forget Password?</p>
+              <Link to="/forget-password">forget Password?</Link>
             </div>
             <button onClick={handleLogin} className="btn btn-info btn-login">
               {loading ? <ClipLoader color="#ffffff" size={20} /> : "Login"}

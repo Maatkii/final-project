@@ -6,6 +6,7 @@ const isAuth = require("../middlewares/auth");
 const mongoose = require("mongoose");
 const Notification = require("../models/Notification");
 const Process = require("../models/Process");
+const Withdraw = require("../models/Withdraw");
 
 const router = express.Router();
 // Route for adding a new proposal to an offer
@@ -161,6 +162,31 @@ router.put("/add-project-link/:id", isAuth, async (req, res) => {
     res
       .status(200)
       .json({ message: "freelancer process updated", data: myProcess });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+router.post("/add-withdraw-request", isAuth, async (req, res) => {
+  try {
+    const { d17Number, price } = req.body;
+    const withdrawRequest = await Withdraw.create({
+      freelancer: req.user._id,
+      d17Number,
+      price,
+    });
+
+    res.status(201).json({ message: "freelancer request withdraw added ! " });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+router.get("/get-withdraw-request", isAuth, async (req, res) => {
+  try {
+    const withdrawRequest = await Withdraw.find({
+      freelancer: req.user._id,
+    });
+
+    res.status(200).json(withdrawRequest);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

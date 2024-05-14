@@ -10,36 +10,6 @@ import axios from "axios";
 import { url } from "../../utils";
 import { toast } from "react-toastify";
 const ClientManageCondidates = () => {
-  const [condidates, setCondidates] = useState([
-    {
-      name: "Sindy Forest",
-      email: "sindy@example.com",
-      phone: "(+61) 123-456-789",
-      image:
-        "https://www.vasterad.com/themes/hireo_21/images/user-avatar-big-03.jpg",
-      price: "$3,200",
-      days: "7 days",
-    },
-    {
-      name: "Sebastiano Piccio ",
-      email: "sebastiano@example.com",
-      phone: "(+39) 123-456-789",
-      image:
-        "https://www.vasterad.com/themes/hireo_21/images/user-avatar-placeholder.png",
-      price: "$4,200",
-      days: "14 days",
-    },
-
-    {
-      name: "Nikolay Azarov",
-      email: "nikolay@example.com",
-      phone: " (+7) 123-456-789",
-      image:
-        "https://www.vasterad.com/themes/hireo_21/images/user-avatar-placeholder.png",
-      price: "$2,200",
-      days: "5 days",
-    },
-  ]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();

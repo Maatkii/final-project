@@ -4,6 +4,8 @@ import {
   GET_TASK_PROPOSALS,
   LOADING,
   GET_MY_PROCESS,
+  GET_FREELANCERS,
+  GET_CLIENT_DEPOSIT_HISTORY,
 } from "../constants/actions-types";
 
 const initialState = {
@@ -12,6 +14,8 @@ const initialState = {
   loading: false,
   error: undefined,
   process: undefined,
+  freelancersList: undefined,
+  depositHistory: undefined,
 };
 
 const clientReducer = (state = initialState, action) => {
@@ -32,11 +36,21 @@ const clientReducer = (state = initialState, action) => {
         ...state,
         freelancerDetails: payload,
       };
+    case GET_FREELANCERS:
+      return {
+        ...state,
+        freelancersList: payload,
+      };
     case ERROR:
       return {
         ...state,
         loading: false,
         error: payload,
+      };
+    case GET_CLIENT_DEPOSIT_HISTORY:
+      return {
+        ...state,
+        depositHistory: payload,
       };
     default:
       return state;

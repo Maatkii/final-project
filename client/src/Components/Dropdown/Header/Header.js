@@ -40,14 +40,60 @@ const Header = () => {
       user: "client",
     },
     {
+      Name: "Freelancers",
+      Path: "/freelancer-list",
+      user: "client",
+    },
+    {
+      Name: "Reclamation",
+      Path: "/add-reclamation",
+      user: "client",
+    },
+
+    {
       Name: "My Active Proposal",
       Path: "/freelancer-active-proposal",
       user: "freelancer",
     },
     {
       Name: "Withdraw",
-      Path: "/withdraw",
+      Path: "/withdraw-request",
       user: "freelancer",
+    },
+    {
+      Name: "Reclamation",
+      Path: "/add-reclamation",
+      user: "freelancer",
+    },
+    {
+      Name: "Freelancers",
+      Path: "/admin/freelancer-list",
+      user: "admin",
+    },
+    {
+      Name: "Clients",
+      Path: "/admin/client-list",
+      user: "admin",
+    },
+    {
+      Name: "Process",
+      Path: "/admin/process-list",
+      user: "admin",
+    },
+    {
+      Name: "Reclamations",
+      Path: "/admin/reclamations-list",
+      user: "admin",
+    },
+    {
+      Name: "Payment Approval",
+      Path: "/admin/payment-approval",
+      user: "admin",
+    },
+    {
+      Name: "Withdraw Approval",
+      Path: "/admin/withdraw-list",
+      user: "admin",
     },
   ]);
   const { chats } = useSelector((state) => state.ChatReducer);
@@ -227,16 +273,16 @@ const Header = () => {
                                 >
                                   <Link to="/messages">
                                     <span className="notification-avatar status-online">
-                                      <img src={Chatusers.avatar} alt="" />
+                                      <img src={Chatusers?.avatar} alt="" />
                                     </span>
                                     <div className="notification-text d-flex flex-column">
-                                      <strong>{`${Chatusers.firstName} ${Chatusers.lastName}`}</strong>
+                                      <strong>{`${Chatusers?.firstName} ${Chatusers?.lastName}`}</strong>
                                       <p className="notification-msg-text">
-                                        {chat.latestMessage.message}
+                                        {chat?.latestMessage?.message}
                                       </p>
                                       <span className="color">
                                         {calculateTimeSince(
-                                          chat.latestMessage.createdAt
+                                          chat?.latestMessage?.createdAt
                                         )}
                                       </span>
                                     </div>
@@ -292,24 +338,36 @@ const Header = () => {
                           <div className="user-name">
                             {user?.firstName} {user?.lastName}{" "}
                             <span>{user?.role}</span>
-                            <span>Balance : ${user?.balance}</span>
+                            {user?.role !== "admin" ? (
+                              <span>Balance : ${user?.balance}</span>
+                            ) : null}
                           </div>
                         </div>
                       </div>
                       <ul className="user-menu-small-nav  ">
-                        <li>
-                          <Link
-                            to={
-                              user.role === "client"
-                                ? "/client-settings"
-                                : user.role === "freelancer"
-                                ? "/freelancer-settings"
-                                : "/"
-                            }
-                          >
-                            <i className="fa-duotone fa-gear" /> Settings
-                          </Link>
-                        </li>
+                        {user?.role === "client" ? (
+                          <li>
+                            <Link to="/deposit-money">
+                              <i className="fa-duotone fa-dollar" /> Deposit
+                            </Link>
+                          </li>
+                        ) : null}
+                        {user?.role !== "admin" ? (
+                          <li>
+                            <Link
+                              to={
+                                user.role === "client"
+                                  ? "/client-settings"
+                                  : user.role === "freelancer"
+                                  ? "/freelancer-settings"
+                                  : "/"
+                              }
+                            >
+                              <i className="fa-duotone fa-gear" /> Settings
+                            </Link>
+                          </li>
+                        ) : null}
+
                         <li
                           onClick={() => {
                             localStorage.removeItem("accessToken");

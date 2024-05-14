@@ -1,6 +1,7 @@
 import {
   CURRENT_USER,
   ERROR,
+  GET_USER_RECLAMATION,
   LOADING,
   LOGIN_USER,
   NOTIFICATIONS,
@@ -14,6 +15,7 @@ const initialState = {
   role: "",
   error: undefined,
   notification: [],
+  reclamations: undefined,
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -51,6 +53,11 @@ const LoginReducer = (state = initialState, action) => {
       return {
         ...state,
         notification: payload,
+      };
+    case GET_USER_RECLAMATION:
+      return {
+        ...state,
+        reclamations: payload,
       };
     default:
       return state;

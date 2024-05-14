@@ -3,6 +3,7 @@ import {
   ADD_FREELANCER_EXPERIENCE_LOADING,
   ADD_PROPOSAL_LOADING,
   GET_FREELANCER_PORTFOLIO,
+  GET_FREELANCER_WITHDRAW_REQUEST,
   GET_MY_PROCESS,
   UPDATE_FREELANCER_PROFILE,
 } from "../constants/actions-types";
@@ -117,3 +118,41 @@ export const add_project_link =
       console.log(error);
     }
   };
+export const add_withdraw_request =
+  ({ withdrawDetails, setLoading }) =>
+  async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          authorization: localStorage.getItem("accessToken"),
+        },
+      };
+      let result = await axios.post(
+        `${url}/api/v1/freelancer/add-withdraw-request`,
+        withdrawDetails,
+        config
+      );
+      dispatch(get_withdraw_request());
+      setLoading(false);
+      successToast("Withdraw request Added !");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+export const get_withdraw_request = () => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("accessToken"),
+      },
+    };
+    let result = await axios.get(
+      `${url}/api/v1/freelancer/get-withdraw-request`,
+      config
+    );
+    dispatch({ type: GET_FREELANCER_WITHDRAW_REQUEST, payload: result.data });
+  } catch (error) {
+    console.log(error);
+  }
+};

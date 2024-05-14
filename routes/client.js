@@ -6,6 +6,7 @@ const Process = require("../models/Process");
 const portfolios = require("../models/portfolios");
 const bcrypt = require("bcryptjs");
 const Notification = require("../models/Notification");
+const Payment = require("../models/Payment");
 
 const router = express.Router();
 
@@ -233,6 +234,43 @@ router.put("/payment/make-payment/:id", isAuth, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json(error);
+  }
+});
+router.get("/freelancers-list", isAuth, async (req, res) => {
+  try {
+    const freelancers = await user.find({ role: "freelancer" });
+
+    res.status(200).json({ message: "freelancer list ! ", data: freelancers });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+router.post("/deposit-money", isAuth, async (req, res) => {
+  try {
+    const { price, paymentMessage, d17Number } = req.body;
+    const deposit = await Payment.create({
+      client: req.user._id,
+      price,
+      paymentMessage,
+      d17Number,
+    });
+
+    res.status(200).json({ message: "deposit Added  ! " });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+});
+router.get("/deposit-history", isAuth, async (req, res) => {
+  try {
+    const payment = await Payment.find({
+      client: req.user._id,
+    }).populate("client");
+    res.status(201).json(payment);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: false, message: err });
   }
 });
 

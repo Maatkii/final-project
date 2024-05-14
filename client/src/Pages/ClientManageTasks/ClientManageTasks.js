@@ -107,7 +107,7 @@ const ClientManageTasks = () => {
                               <div className="buttons-to-right always-visible">
                                 <Link
                                   className="button ripple-effect"
-                                  onTransitionEnd={
+                                  to={
                                     clientTask.offerSituation == "open"
                                       ? `/manage-condidates/${clientTask._id}`
                                       : null

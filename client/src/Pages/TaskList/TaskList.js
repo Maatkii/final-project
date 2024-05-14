@@ -45,7 +45,7 @@ const TaskList = () => {
   const filteredTasks = tasks?.filter(
     (task) =>
       task.price.max >= value[1] ||
-      task.skills.some((skill) => filterSkills.includes(skill))
+      task.skills.some((skill) => (filterSkills.includes(skill) ? task : null))
   );
 
   return (
@@ -308,44 +308,50 @@ const TaskList = () => {
             {/* Tasks Container */}
             <div className="tasks-list-container compact-list margin-top-35">
               {/* Task */}
-              {filteredTasks.map((task, index) => {
-                return (
-                  <a className="task-listing" key={index}>
-                    <div className="task-listing-details">
-                      <div className="task-listing-description">
-                        <h3 className="task-listing-title">{task.title}</h3>
-                        <ul className="task-icons">
-                          <li>
-                            <i className="fa-solid fa-clock" />{" "}
-                            {calculateTimeSince(task.postedDate)}
-                          </li>
-                        </ul>
-                        <p className="task-listing-text">{task.description}</p>
-                        <div className="task-tags">
-                          {task.skills.map((skill, index) => {
-                            return <span key={index}>{skill}</span>;
-                          })}
+              {filteredTasks
+                .filter((el) => el.offerSituation !== "closed")
+                .map((task, index) => {
+                  return (
+                    <a className="task-listing" key={index}>
+                      <div className="task-listing-details">
+                        <div className="task-listing-description">
+                          <h3 className="task-listing-title">{task.title}</h3>
+                          <ul className="task-icons">
+                            <li>
+                              <i className="fa-solid fa-clock" />{" "}
+                              {calculateTimeSince(task.postedDate)}
+                            </li>
+                          </ul>
+                          <p className="task-listing-text">
+                            {task.description}
+                          </p>
+                          <div className="task-tags">
+                            {task.skills.map((skill, index) => {
+                              return <span key={index}>{skill}</span>;
+                            })}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="task-listing-bid">
-                      <div className="task-listing-bid-inner">
-                        <div className="task-offers">
-                          <strong>
-                            ${task.price.min} - ${task.price.max}
-                          </strong>
+                      <div className="task-listing-bid">
+                        <div className="task-listing-bid-inner">
+                          <div className="task-offers">
+                            <strong>
+                              ${task.price.min} - ${task.price.max}
+                            </strong>
+                          </div>
+                          <span
+                            className="button button-sliding-icon ripple-effect"
+                            onClick={() =>
+                              navigate(`/task-details/${task._id}`)
+                            }
+                          >
+                            Bid Now <i className="fa-solid fa-arrow-right" />
+                          </span>
                         </div>
-                        <span
-                          className="button button-sliding-icon ripple-effect"
-                          onClick={() => navigate(`/task-details/${task._id}`)}
-                        >
-                          Bid Now <i className="fa-solid fa-arrow-right" />
-                        </span>
                       </div>
-                    </div>
-                  </a>
-                );
-              })}
+                    </a>
+                  );
+                })}
             </div>
             {/* Tasks Container / End */}
             {/* Pagination */}

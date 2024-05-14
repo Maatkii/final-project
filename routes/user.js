@@ -12,6 +12,8 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const nodemailer = require("nodemailer");
 const portfolios = require("../models/portfolios");
 const Notification = require("../models/Notification");
+const Reclamation = require("../models/Reclamation");
+const Payment = require("../models/Payment");
 
 cloudinary.config({
   cloud_name: "",
@@ -196,4 +198,88 @@ router.put("/make-notification-readed", isAuth, async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 });
+
+router.post("/send_reset_password", async (req, res) => {
+  try {
+    const { resetCode, email } = req.body;
+    const findUser = await User.findOne({ email });
+    // Send email with the generated password
+    const transporter = nodemailer.createTransport({
+      // Configure your email provider here
+      // Example for Gmail:
+      service: "gmail",
+      auth: {
+        user: "hardcodebeja@gmail.com",
+        pass: "aspwhjbqfjbigvrv",
+      },
+    });
+
+    const mailOptions = {
+      from: "HardCode",
+      to: email,
+      subject: "Code Reset",
+      text: `Dear ${findUser.firstName} ${findUser.lastName},\n\nYour Recovery Code  is: ${resetCode}`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+      } else {
+        console.log("Email sent:", info.response);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: false, message: err });
+  }
+});
+router.post("/change-password", async (req, res) => {
+  try {
+    const { password, email } = req.body;
+    const findUser = await User.findOne({ email });
+
+    bcrypt.hash(password, 12, async (err, hash) => {
+      if (err) {
+        res.status(500).json({ status: false, message: err });
+      } else if (hash) {
+        await User.findByIdAndUpdate(findUser._id, {
+          password: hash,
+        });
+        res.status(200).json({
+          status: true,
+          message: "password changed ! ",
+        });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: false, message: err });
+  }
+});
+router.post("/add-reclamation", isAuth, async (req, res) => {
+  try {
+    const { description } = req.body;
+
+    const reclam = await Reclamation.create({
+      description,
+      user: req.user._id,
+    });
+    res.status(201).json(reclam);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: false, message: err });
+  }
+});
+router.get("/users-reclamation", isAuth, async (req, res) => {
+  try {
+    const reclam = await Reclamation.find({
+      user: req.user._id,
+    }).populate("user");
+    res.status(201).json(reclam);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ status: false, message: err });
+  }
+});
+
 module.exports = router;

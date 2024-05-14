@@ -5,6 +5,7 @@ import {
   GET_FREELANCER_PORTFOLIO,
   UPDATE_FREELANCER_PROFILE,
   GET_MY_PROCESS,
+  GET_FREELANCER_WITHDRAW_REQUEST,
 } from "../constants/actions-types";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   loading: false,
   error: undefined,
   process: [],
+  withdrawRequest: undefined,
 };
 
 const taskReducer = (state = initialState, action) => {
@@ -47,6 +49,11 @@ const taskReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: payload,
+      };
+    case GET_FREELANCER_WITHDRAW_REQUEST:
+      return {
+        ...state,
+        withdrawRequest: payload,
       };
     default:
       return state;

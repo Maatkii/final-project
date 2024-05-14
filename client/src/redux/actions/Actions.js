@@ -1,6 +1,7 @@
 import {
   CURRENT_USER,
   ERROR,
+  GET_USER_RECLAMATION,
   LOADING,
   LOGIN_USER,
   NOTIFICATIONS,
@@ -87,6 +88,78 @@ export const Make_notification_readed = () => async (dispatch) => {
     .put(`${url}/api/v1/auth/make-notification-readed`, {}, config)
     .then(async (response) => {
       await dispatch(notifications());
+    })
+    .catch((err) => {
+      errorToast(err.response.data.message);
+    });
+};
+export const send_password_reset =
+  ({ resetCode, email }) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("accessToken"),
+      },
+    };
+    axios
+      .post(
+        `${url}/api/v1/auth/send_reset_password`,
+        { resetCode, email },
+        config
+      )
+      .then(async (response) => {})
+      .catch((err) => {
+        errorToast(err.response.data.message);
+      });
+  };
+export const change_password =
+  ({ password, email, navigate }) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("accessToken"),
+      },
+    };
+    axios
+      .post(`${url}/api/v1/auth/change-password`, { password, email }, config)
+      .then(async (response) => {
+        navigate("/login");
+        successToast("Password Changed ! ");
+      })
+      .catch((err) => {
+        errorToast(err.response.data.message);
+      });
+  };
+export const add_reclamation =
+  ({ description, setLoading, setDescription }) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("accessToken"),
+      },
+    };
+    axios
+      .post(`${url}/api/v1/auth/add-reclamation`, { description }, config)
+      .then(async (response) => {
+        setLoading(false);
+        successToast("Reclamation Added ! ");
+        alert("Administrator will Contact you soon ! ");
+        setDescription("");
+      })
+      .catch((err) => {
+        errorToast(err.response.data.message);
+      });
+  };
+export const get_user_reclamations = () => async (dispatch) => {
+  const config = {
+    headers: {
+      authorization: localStorage.getItem("accessToken"),
+    },
+  };
+  axios
+    .get(`${url}/api/v1/auth/users-reclamation`, config)
+    .then(async (response) => {
+      dispatch({ type: GET_USER_RECLAMATION, payload: response.data });
     })
     .catch((err) => {
       errorToast(err.response.data.message);

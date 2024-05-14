@@ -10,6 +10,7 @@ const user = require("./routes/user");
 const client = require("./routes/client");
 const freelancer = require("./routes/freelancer");
 const chat = require("./routes/chat");
+const admin = require("./routes/admin");
 const connect = require("./config/connectDB");
 const app = express();
 const server = createServer(app);
@@ -28,6 +29,7 @@ app.use("/api/v1/auth", user);
 app.use("/api/v1/client", client);
 app.use("/api/v1/freelancer", freelancer);
 app.use("/api/v1/chat", chat);
+app.use("/api/v1/admin", admin);
 
 const start = async () => {
   try {

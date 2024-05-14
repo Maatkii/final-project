@@ -1,6 +1,8 @@
 import axios from "axios";
 import {
+  GET_CLIENT_DEPOSIT_HISTORY,
   GET_FREELANCER_DETAILS,
+  GET_FREELANCERS,
   GET_MY_PROCESS,
   GET_TASK_PROPOSALS,
 } from "../constants/actions-types";
@@ -113,4 +115,58 @@ export const make_payment = (processId) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const get_freelancers_profile = (id) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        authorization: localStorage.getItem("accessToken"),
+      },
+    };
+    let result = await axios.get(
+      `${url}/api/v1/client/freelancers-list`,
+      config
+    );
+    dispatch({ type: GET_FREELANCERS, payload: result.data.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const deposit_money =
+  ({ depositDetails, setLoading }) =>
+  async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          authorization: localStorage.getItem("accessToken"),
+        },
+      };
+      let result = await axios.post(
+        `${url}/api/v1/client/deposit-money`,
+        depositDetails,
+        config
+      );
+      setLoading(false);
+      dispatch(get_client_deposit_history());
+      successToast("Depost Request Added ! ");
+    } catch (error) {
+      errorToast(error.message);
+      setLoading(false);
+      console.log(error);
+    }
+  };
+export const get_client_deposit_history = () => async (dispatch) => {
+  const config = {
+    headers: {
+      authorization: localStorage.getItem("accessToken"),
+    },
+  };
+  axios
+    .get(`${url}/api/v1/client/deposit-history`, config)
+    .then(async (response) => {
+      dispatch({ type: GET_CLIENT_DEPOSIT_HISTORY, payload: response.data });
+    })
+    .catch((err) => {
+      errorToast(err.response.data.message);
+    });
 };
