@@ -19,6 +19,26 @@ router.get("/list-users/:type", async (req, res) => {
     res.status(500).json({ message: "server Error", error });
   }
 });
+router.delete("/delete-client/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await user.findByIdAndDelete(id);
+    res.status(200).json({ message: "Client deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server Error", error });
+  }
+});
+router.delete("/delete-freelancer/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await user.findByIdAndDelete(id);
+    res.status(200).json({ message: "freelancer deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Server Error", error });
+  }
+});
 router.get("/user/:id", async (req, res) => {
   try {
     const { id } = req.params;

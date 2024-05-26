@@ -12,17 +12,6 @@ const Messages = () => {
         <div className="dashboard-headline">
           <h3>Messages</h3>
           {/* Breadcrumbs */}
-          <nav id="breadcrumbs" className="dark">
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Dashboard</a>
-              </li>
-              <li>Messages</li>
-            </ul>
-          </nav>
         </div>
         <div className="messages-container margin-top-0 margin-bottom-40">
           <div className="messages-container-inner">

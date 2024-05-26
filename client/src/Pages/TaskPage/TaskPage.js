@@ -147,7 +147,7 @@ const TaskPage = () => {
                         </div>
                         <div className="bids-bid">
                           <div className="bid-rate">
-                            <div className="rate">${proposal.price}</div>
+                            <div className="rate">TND{proposal.price}</div>
                             <span>
                               {proposal.deliveryTime.number}{" "}
                               {proposal.deliveryTime.period}
@@ -177,7 +177,7 @@ const TaskPage = () => {
                     <div className="bidding-inner">
                       {/* Headline */}
                       <span className="bidding-detail margin-bottom-20">
-                        Set your <strong>Price: ${value[1]}</strong>
+                        Set your <strong>Price: TND{value[1]}</strong>
                       </span>
                       {/* Price Slider */}
                       <RangeSlider

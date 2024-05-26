@@ -54,17 +54,6 @@ const ClientPostTask = () => {
             <div className="dashboard-headline">
               <h3>Post a Task</h3>
               {/* Breadcrumbs */}
-              <nav id="breadcrumbs" className="dark">
-                <ul>
-                  <li>
-                    <a href="#">Home</a>
-                  </li>
-                  <li>
-                    <a href="#">Dashboard</a>
-                  </li>
-                  <li>Post a Task</li>
-                </ul>
-              </nav>
             </div>
             {/* Row */}
             <div className="row">
@@ -129,7 +118,7 @@ const ClientPostTask = () => {
                                     }))
                                   }
                                 />
-                                <i className="currency">USD</i>
+                                <i className="currency">TND</i>
                               </div>
                             </div>
                             <div className="col-xl-6">
@@ -148,7 +137,7 @@ const ClientPostTask = () => {
                                     }))
                                   }
                                 />
-                                <i className="currency">USD</i>
+                                <i className="currency">TND</i>
                               </div>
                             </div>
                           </div>

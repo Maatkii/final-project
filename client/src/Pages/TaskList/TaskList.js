@@ -248,7 +248,7 @@ const TaskList = () => {
                 <h3>Fixed Price</h3>
                 <div className="margin-top-55" />
                 {/* Range Slider */}
-                <h4>{`$${value[1]}`}</h4>
+                <h4>{`TND ${value[1]}`}</h4>
                 <RangeSlider
                   min={0}
                   className="single-thumb"
@@ -336,7 +336,7 @@ const TaskList = () => {
                         <div className="task-listing-bid-inner">
                           <div className="task-offers">
                             <strong>
-                              ${task.price.min} - ${task.price.max}
+                              TND{task.price.min} - TND{task.price.max}
                             </strong>
                           </div>
                           <span

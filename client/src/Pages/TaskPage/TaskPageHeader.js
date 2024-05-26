@@ -63,7 +63,8 @@ const TaskPageHeader = ({ taskDetails }) => {
                 <div className="salary-box">
                   <div className="salary-type">Project Budget</div>
                   <div className="salary-amount">
-                    ${taskDetails !== undefined && taskDetails.price.min} - $
+                    TND{taskDetails !== undefined && taskDetails.price.min} -
+                    TND
                     {taskDetails !== undefined && taskDetails.price.max}
                   </div>
                 </div>

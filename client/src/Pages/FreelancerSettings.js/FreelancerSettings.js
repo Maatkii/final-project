@@ -86,17 +86,6 @@ const FreelancerSettings = () => {
               <div className="dashboard-headline">
                 <h3>Settings</h3>
                 {/* Breadcrumbs */}
-                <nav id="breadcrumbs" className="dark">
-                  <ul>
-                    <li>
-                      <a href="#">Home</a>
-                    </li>
-                    <li>
-                      <a href="#">Dashboard</a>
-                    </li>
-                    <li>Settings</li>
-                  </ul>
-                </nav>
               </div>
               {/* Row */}
               <div className="row">
@@ -386,8 +375,9 @@ const FreelancerSettings = () => {
                                     className="social-input"
                                     defaultValue={
                                       freelancerPortfolio &&
-                                      freelancerPortfolio.socialMediaLinks[0]
-                                        .link
+                                      (freelancerPortfolio.socialMediaLinks[0]
+                                        ?.link ||
+                                        "")
                                     }
                                     onBlur={() =>
                                       (freelancerPortfolio.socialMediaLinks[0] =
@@ -411,8 +401,9 @@ const FreelancerSettings = () => {
                                     className="social-input"
                                     defaultValue={
                                       freelancerPortfolio &&
-                                      freelancerPortfolio.socialMediaLinks[2]
-                                        .link
+                                      (freelancerPortfolio.socialMediaLinks[2]
+                                        ?.link ||
+                                        "")
                                     }
                                     onChange={(e) =>
                                       setDribbleLink(e.target.value)
@@ -435,8 +426,9 @@ const FreelancerSettings = () => {
                                     type="text"
                                     defaultValue={
                                       freelancerPortfolio &&
-                                      freelancerPortfolio.socialMediaLinks[1]
-                                        .link
+                                      (freelancerPortfolio.socialMediaLinks[1]
+                                        ?.link ||
+                                        "")
                                     }
                                     className="social-input"
                                     onChange={(e) =>

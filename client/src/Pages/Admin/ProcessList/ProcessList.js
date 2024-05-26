@@ -32,13 +32,14 @@ const ProcessList = () => {
               return (
                 <tr key={index}>
                   <td>
-                    {el.client.firstName} {el.client.lastName}
+                    {el.client &&
+                      `${el.client.firstName} ${el.client.lastName}`}
                   </td>
                   <td>
-                    {el.freelancer.firstName} {el.freelancer.lastName}
+                    {el.freelancer &&
+                      `${el.freelancer.firstName} ${el.freelancer.lastName}`}
                   </td>
-
-                  <td>{el.offre.description}</td>
+                  <td>{el.offre?.description}</td>
                   <td>{el.price}</td>
                   <td>{el.deliveryTime}</td>
                   <td>{el.createdAt.slice(0, 10)}</td>

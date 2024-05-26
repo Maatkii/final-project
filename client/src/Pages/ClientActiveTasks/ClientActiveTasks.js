@@ -22,17 +22,6 @@ const ClientActiveTasks = () => {
             <div className="dashboard-headline">
               <h3>My Active Bids</h3>
               {/* Breadcrumbs */}
-              <nav id="breadcrumbs" className="dark">
-                <ul>
-                  <li>
-                    <a href="#">Home</a>
-                  </li>
-                  <li>
-                    <a href="#">Dashboard</a>
-                  </li>
-                  <li>My Active Bids</li>
-                </ul>
-              </nav>
             </div>
             {/* Row */}
             <div className="row">
@@ -92,7 +81,7 @@ const ClientActiveTasks = () => {
                               {/* Task Details */}
                               <ul className="dashboard-task-info">
                                 <li>
-                                  <strong>${process.price}</strong>
+                                  <strong>TND{process.price}</strong>
                                   <span>Fixed Price</span>
                                 </li>
                                 <li>

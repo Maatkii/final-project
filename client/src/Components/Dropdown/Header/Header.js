@@ -7,6 +7,7 @@ import {
   Make_notification_readed,
   notifications,
 } from "../../../redux/actions/Actions";
+import Logo from "../../../Assets/images/logo-navbar.png";
 import "./style.css";
 
 const Header = () => {
@@ -119,10 +120,7 @@ const Header = () => {
             {/* Logo */}
             <div id="logo">
               <a href="#">
-                <img
-                  src="https://www.vasterad.com/themes/hireo_21/images/logo.png"
-                  alt=""
-                />
+                <img src={Logo} alt="" />
               </a>
             </div>
             {/* Main Navigation */}

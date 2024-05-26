@@ -153,7 +153,7 @@ const ClientManageCondidates = () => {
                                     </div>
                                     <ul className="dashboard-task-info bid-info">
                                       <li>
-                                        <strong>${proposal.price}</strong>
+                                        <strong>TND{proposal.price}</strong>
                                         <span>Fixed Price</span>
                                       </li>
                                       <li>

@@ -41,7 +41,8 @@ const PaymentApproval = () => {
                   return (
                     <tr key={index}>
                       <td>
-                        {el.client.firstName} {el.client.lastName}
+                        {el.client &&
+                          `${el.client.firstName} ${el.client.lastName}`}
                       </td>
                       <td>{el.d17Number}</td>
                       <td>{el.paymentMessage}</td>

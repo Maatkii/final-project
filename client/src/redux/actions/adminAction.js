@@ -39,6 +39,7 @@ export const admin_get_freelancers = () => async (dispatch) => {
       errorToast(err.response.data.message);
     });
 };
+
 export const admin_get_process = () => async (dispatch) => {
   const config = {
     headers: {
@@ -95,6 +96,39 @@ export const get_admin_deposit_list = () => async (dispatch) => {
     .get(`${url}/api/v1/admin/deposit-history`, config)
     .then(async (response) => {
       dispatch({ type: GET_ADMIN_DEPOSIT_HISTORY, payload: response.data });
+    })
+    .catch((err) => {
+      errorToast(err.response.data.message);
+    });
+};
+export const admin_delete_client = (id) => async (dispatch) => {
+  const config = {
+    headers: {
+      authorization: localStorage.getItem("accessToken"),
+    },
+  };
+  axios
+    .delete(`${url}/api/v1/admin/delete-client/${id}`, config)
+    .then(async (response) => {
+      dispatch(admin_get_clients()); // Refresh client list after deletion
+      successToast("Client deleted successfully");
+    })
+    .catch((err) => {
+      errorToast(err.response.data.message);
+    });
+};
+
+export const admin_delete_freelancer = (id) => async (dispatch) => {
+  const config = {
+    headers: {
+      authorization: localStorage.getItem("accessToken"),
+    },
+  };
+  axios
+    .delete(`${url}/api/v1/admin/delete-Freelancer/${id}`, config)
+    .then(async (response) => {
+      dispatch(admin_get_freelancers()); // Refresh Freelancer list after deletion
+      successToast("Freelancer deleted successfully");
     })
     .catch((err) => {
       errorToast(err.response.data.message);

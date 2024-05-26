@@ -110,7 +110,7 @@ const ModalUpdateTask = ({ show, updateTask, setUpdateTask, setShow }) => {
                           }))
                         }
                       />
-                      <i className="currency">USD</i>
+                      <i className="currency">TND</i>
                     </div>
                   </div>
                   <div className="col-xl-6">
@@ -130,7 +130,7 @@ const ModalUpdateTask = ({ show, updateTask, setUpdateTask, setShow }) => {
                           }))
                         }
                       />
-                      <i className="currency">USD</i>
+                      <i className="currency">TND</i>
                     </div>
                   </div>
                 </div>

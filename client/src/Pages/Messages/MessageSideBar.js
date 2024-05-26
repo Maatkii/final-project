@@ -10,17 +10,17 @@ import {
 } from "../../redux/actions/chatActions";
 import { current } from "../../redux/actions/Actions";
 import { Link } from "react-router-dom";
+
 const MessageSideBar = ({ fetchAgain }) => {
   const { chats, selectedChat } = useSelector((state) => state.ChatReducer);
   const { user } = useSelector((state) => state.LoginReducer);
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     dispatch(current());
-  }, []);
-  useEffect(() => {
     dispatch(fetchChats());
-  }, [user, fetchAgain]);
+  }, [fetchAgain]);
 
   useEffect(() => {
     if (chats.length > 0) {
@@ -28,19 +28,35 @@ const MessageSideBar = ({ fetchAgain }) => {
     }
   }, [chats]);
 
+  const filteredChats = chats.filter((chat) => {
+    const sender = getSender(user, chat?.users);
+    const fullName = `${sender.firstName} ${sender.lastName}`;
+    return fullName.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <div>
       {/* Messages */}
       <div className="messages-inbox">
         <div className="messages-headline">
           <div className="input-with-icon">
-            <input id="autocomplete-input" type="text" placeholder="Search" />
+            <input
+              id="autocomplete-input"
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
             <i className="fa-regular fa-search" />
           </div>
         </div>
         <ul>
-          {chats?.length > 0 ? (
-            chats.map((chat, index) => {
+          {filteredChats.length > 0 ? (
+            filteredChats.map((chat, index) => {
               return (
                 // add className active-message for active discussion
                 <li
@@ -77,7 +93,7 @@ const MessageSideBar = ({ fetchAgain }) => {
             <li>
               <a href="#">
                 <div className="message-avatar">
-                  <p>There's No Chat yet ! </p>
+                  <p>No chats found!</p>
                 </div>
               </a>
             </li>
