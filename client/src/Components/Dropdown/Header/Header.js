@@ -119,10 +119,7 @@ const Header = () => {
             {/* Logo */}
             <div id="logo">
               <a href="#">
-                <img
-                  src="https://www.vasterad.com/themes/hireo_21/images/logo.png"
-                  alt=""
-                />
+                <img src="" alt="" />
               </a>
             </div>
             {/* Main Navigation */}
