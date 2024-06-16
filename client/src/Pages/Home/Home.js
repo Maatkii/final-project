@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import "./Home.css";
 import video from "../../../src/Assets/images/home.mp4";
 const Home = () => {
@@ -46,7 +48,9 @@ const Home = () => {
       <section className="cta">
         <div className="container">
           <h2>Ready to get started?</h2>
-          <button>Join Now</button>
+          <Link to="/register">
+            <button>Join Now</button>
+          </Link>
         </div>
       </section>
     </div>
